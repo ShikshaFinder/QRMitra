@@ -1,21 +1,11 @@
 import Head from "next/head";
-import { Inter } from "next/font/google";
-const inter = Inter({ subsets: ["latin"] });
-import QR from "./components/QR";
-// import QRCodeGenerator from "./components/Qrcodegen";
-
+import Image from "next/image";
+import styles from "../styles/Home.module.css"; import { supabase } from "./utils/supabase";
 export default function Home() {
-  const customWords = "YourCustomWordsHere";
-  return (
-    <>
-      <Head>
-        <title>QRMitra</title>
-        <meta name="QRmitra" content="QRmitra" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      </Head>
-
-      <QR />
-      {/* <QRCodeGenerator data={customWords} /> */}
-    </>
-  );
+}
+return <div className={styles.container}></div>;
+export async function getStaticProps (context) {
+const data = await supabase.from("posts").select("*");
+return {
+props: { data: data},
 }
