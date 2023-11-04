@@ -1,77 +1,79 @@
-"use client"
-
+"use client";
 import React, { useState } from "react";
 import {
-  ChakraProvider,
   Box,
-  Input,
-  Textarea,
-  Button,
+  Heading,
   FormControl,
   FormLabel,
+  Input,
+  Textarea,
   Slider,
   SliderTrack,
   SliderFilledTrack,
   SliderThumb,
-  Flex,
+  Button,
 } from "@chakra-ui/react";
 
-function FeedbackForm() {
+function UserFeedbackForm() {
+  const [name, setName] = useState("");
   const [feedback, setFeedback] = useState("");
-  const [rating, setRating] = useState(5); // Default rating
+  const [rating, setRating] = useState(5); // Default rating value
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission, e.g., send data to your backend or store it locally
-    console.log("Feedback:", feedback);
-    console.log("Rating:", rating);
+    // Handle form submission, e.g., sending data to a server
   };
 
   return (
-    <Box p="4">
+    <Box maxW="400px" mx="auto" mt="4">
+      <Heading as="h2" size="lg" mb="4">
+        User Feedback Form
+      </Heading>
       <form onSubmit={handleSubmit}>
-        <FormControl>
-          <FormLabel>Feedback</FormLabel>
-          <Textarea
-            value={feedback}
-            onChange={(e) => setFeedback(e.target.value)}
-            placeholder="Enter your feedback"
+        <FormControl id="name" isRequired>
+          <FormLabel>Name</FormLabel>
+          <Input
+            type="text"
+            placeholder="Your Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           />
         </FormControl>
 
-        <FormControl mt="4">
-          <FormLabel>Rating (out of 10)</FormLabel>
-          <Flex alignItems="center">
-            <Slider
-              value={rating}
-              onChange={(value) => setRating(value)}
-              min={1}
-              max={10}
-              step={1}
-            >
-              <SliderTrack>
-                <SliderFilledTrack />
-              </SliderTrack>
-              <SliderThumb boxSize={6} />
-            </Slider>
-            <Box ml="2">{rating}</Box>
-          </Flex>
+        <FormControl id="feedback" mt="4" isRequired>
+          <FormLabel>Feedback</FormLabel>
+          <Textarea
+            placeholder="Share your feedback..."
+            value={feedback}
+            onChange={(e) => setFeedback(e.target.value)}
+          />
         </FormControl>
 
-        <Button mt="4" colorScheme="teal" type="submit">
-          Submit
+        <FormControl id="rating" mt="4" isRequired>
+          <FormLabel>Rating (out of 10)</FormLabel>
+          <Slider
+            defaultValue={rating}
+            min={0}
+            max={10}
+            step={1}
+            value={rating}
+            onChange={(value) => setRating(value)}
+          >
+            <SliderTrack>
+              <SliderFilledTrack />
+            </SliderTrack>
+            <SliderThumb boxSize={6} fontSize="sm">
+              {rating}
+            </SliderThumb>
+          </Slider>
+        </FormControl>
+
+        <Button type="submit" colorScheme="blue" mt="4">
+          Submit Feedback
         </Button>
       </form>
     </Box>
   );
 }
 
-function App() {
-  return (
-    <ChakraProvider>
-      <FeedbackForm />
-    </ChakraProvider>
-  );
-}
-
-export default App;
+export default UserFeedbackForm;
