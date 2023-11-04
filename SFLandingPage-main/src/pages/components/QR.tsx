@@ -32,10 +32,17 @@ const QR = () => {
         <Stack spacing={4} w={"full"} maxW={"md"}>
           <Heading fontSize={"2xl"}>Generate QR code</Heading>
           <FormControl id="customWords">
-            <FormLabel>Enter name of police station</FormLabel>
+            <FormLabel>Enter location of police station</FormLabel>
             <Input
               type="text"
               onChange={(e) => setCustomWords(e.target.value)}
+            />
+          </FormControl>
+
+          <FormControl id="customWords">
+            <FormLabel>Enter name of police station</FormLabel>
+            <Input
+              type="text"
             />
           </FormControl>
           <Button
@@ -49,10 +56,9 @@ const QR = () => {
       </Flex>
       <Flex flex={1}>
         {/* Display the QR code image dynamically */}
-        <QRCodeGenerator data={"shikshafinder.com/"+   qrCodeData} />
+        <QRCodeGenerator data={"qr-mitra.vercel.app/" + qrCodeData} />
       </Flex>
     </Stack>
-    
   );
 };
 
